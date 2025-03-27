@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3'; // Import Link from Inertia.js
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -19,7 +19,7 @@ const image = '/images/1.png';
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
             <div
-                class="relative flex min-h-[100vh] flex-1 items-center justify-center rounded-xl border border-sidebar-border/70 dark:border-sidebar-border md:min-h-min"
+                class="relative flex min-h-[30vh] flex-1 items-center justify-center rounded-xl border border-sidebar-border/70 dark:border-sidebar-border md:min-h-min"
             >
                 <img class="opacity-80" :src="image" alt="My Image" />
             </div>
@@ -27,12 +27,13 @@ const image = '/images/1.png';
                 <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
                     <div class="relative flex h-full flex-col items-center justify-center p-5">
                         <img class="absolute h-full w-full opacity-75" src="/images/foods.png" alt="" />
-                        <button
-                            type="button"
+
+                        <Link
+                            href="/search"
                             class="relative z-10 rounded-lg bg-gray-800 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
                         >
                             Search now
-                        </button>
+                        </Link>
                     </div>
                 </div>
                 <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
