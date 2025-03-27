@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import Card from '@/components/ui/card/Card.vue';
-import CardContent from '@/components/ui/card/CardContent.vue';
-import CardDescription from '@/components/ui/card/CardDescription.vue';
-import CardHeader from '@/components/ui/card/CardHeader.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
@@ -25,26 +21,19 @@ const image = '/images/1.png';
             <div
                 class="relative flex min-h-[100vh] flex-1 items-center justify-center rounded-xl border border-sidebar-border/70 dark:border-sidebar-border md:min-h-min"
             >
-                <img :src="image" alt="My Image" />
+                <img class="opacity-80" :src="image" alt="My Image" />
             </div>
             <div class="grid auto-rows-min gap-4 md:grid-cols-3">
                 <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                    <CardContent>
-                        <Card>
-                            <CardHeader
-                                ><button
-                                    type="button"
-                                    class="mb-2 me-2 rounded-lg bg-gray-800 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
-                                >
-                                    Search now
-                                </button></CardHeader
-                            >
-                            <CardDescription>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea eaque beatae fugit minima tempore asperiores est deserunt,
-                                soluta, recusandae nobis veritatis eveniet? In totam delectus excepturi amet repellat quasi exercitationem.
-                            </CardDescription>
-                        </Card>
-                    </CardContent>
+                    <div class="relative flex h-full flex-col items-center justify-center p-5">
+                        <img class="absolute h-full w-full opacity-75" src="/images/foods.png" alt="" />
+                        <button
+                            type="button"
+                            class="relative z-10 rounded-lg bg-gray-800 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+                        >
+                            Search now
+                        </button>
+                    </div>
                 </div>
                 <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
                     <PlaceholderPattern />
