@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import MyFavorite from '@/components/Dashboard/FavoriteNavigation.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/vue3'; // Import Link from Inertia.js
+import { Head } from '@inertiajs/vue3';
 import Search from '../components/Dashboard/Search.vue';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 const breadcrumbs: BreadcrumbItem[] = [
@@ -28,7 +29,7 @@ const image = '/images/1.png';
                     <Search />
                 </div>
                 <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                    <PlaceholderPattern />
+                    <MyFavorite />
                 </div>
                 <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
                     <PlaceholderPattern />
