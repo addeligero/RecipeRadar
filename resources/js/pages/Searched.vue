@@ -29,15 +29,21 @@ const fetchMeals = async () => {
         error.value = null;
         const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchQuery.value}`);
         const data = await response.json();
-        meals.value = data.meals || []; // Assign the meals data or an empty array if no results
+        meals.value = data.meals || [];
     } catch (err) {
         error.value = 'Failed to fetch meals. Please try again later.';
     } finally {
         isLoading.value = false;
     }
 };
-</script>
 
+// Helper function to extract YouTube video ID
+const getYouTubeVideoId = (url: string): string => {
+    const regExp = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)|youtu\.be\/([^&]+)/;
+    const match = url.match(regExp);
+    return match ? match[1] || match[2] : '';
+};
+</script>
 <template>
     <Head title="Search Results" />
 
@@ -51,7 +57,7 @@ const fetchMeals = async () => {
                     v-model="searchQuery"
                     type="text"
                     placeholder="Enter a meal name..."
-                    class="w-full rounded-lg border px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="w-full rounded-lg border px-4 py-2 text-sm text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <button
                     @click="fetchMeals"
@@ -70,18 +76,42 @@ const fetchMeals = async () => {
             </div>
 
             <!-- meals -->
-            <div v-else-if="meals.length > 0" class="grid grid-cols-1 gap-4 md:grid-cols-3">
-                <div v-for="meal in meals" :key="meal.idMeal" class="rounded-lg border p-4 shadow-md">
-                    <img :src="meal.strMealThumb" :alt="meal.strMeal" class="mb-2 h-48 w-full rounded-lg object-cover" />
-                    <h2 class="text-lg font-semibold">{{ meal.strMeal }}</h2>
-                    <p class="text-sm text-gray-600">{{ meal.strCategory }}</p>
-                    <p class="text-sm text-gray-600">{{ meal.strArea }}</p>
+
+            <div v-else-if="meals.length > 0" class="flex flex-col items-center gap-4">
+                <div v-for="meal in meals" :key="meal.idMeal" class="w-full max-w-4xl rounded-lg border p-4 shadow-md">
+                    <div class="flex flex-col gap-4 md:flex-row">
+                        <!-- Meal Image and Video -->
+                        <div class="flex flex-col md:w-1/3">
+                            <!-- Meal Image -->
+                            <img :src="meal.strMealThumb" :alt="meal.strMeal" class="h-48 w-full rounded-lg object-cover" />
+                            <br />
+                            <hr class="bg-white" />
+                            <!-- Embed YouTube Video -->
+                            <div v-if="meal.strYoutube" class="mt-4">
+                                <h3 class="mb-2 text-lg font-semibold">Watch tutorial:</h3>
+                                <iframe
+                                    :src="`https://www.youtube.com/embed/${getYouTubeVideoId(meal.strYoutube)}`"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    class="h-64 w-full rounded-lg"
+                                ></iframe>
+                            </div>
+                        </div>
+
+                        <!-- Meal Details -->
+                        <div class="flex flex-col justify-center md:w-2/3">
+                            <h2 class="mb-2 text-2xl font-semibold">{{ meal.strMeal }}</h2>
+                            <p class="mb-1 text-sm text-gray-600"><strong>Category:</strong> {{ meal.strCategory }}</p>
+                            <p class="mb-1 text-sm text-gray-600"><strong>Area:</strong> {{ meal.strArea }}</p>
+                            <p class="mb-2 text-sm text-gray-600"><strong>Instructions:</strong> {{ meal.strInstructions }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-
             <!-- No results message -->
             <div v-else>
-                <p>No meals found. Try searching for something else.</p>
+                <p>No meals found. Try search for something.</p>
             </div>
         </div>
     </AppLayout>
