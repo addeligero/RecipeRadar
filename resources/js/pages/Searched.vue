@@ -31,6 +31,7 @@ const fetchMeals = async () => {
         const data = await response.json();
         meals.value = data.meals || [];
     } catch (err) {
+        console.error('Error fetching meals:', err); // Log error for debugging
         error.value = 'Failed to fetch meals. Please try again later.';
     } finally {
         isLoading.value = false;
