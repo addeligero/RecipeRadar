@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MyFavorite from '@/components/Dashboard/MyFavorite.vue';
+import MyFavorite from '@/components/Dashboard/FavoriteNavigation.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';

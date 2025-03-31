@@ -15,8 +15,8 @@ Route::get('search', function () {
     return Inertia::render('Searched');
 })->middleware(['auth', 'verified'])->name('searched');
 
-Route::get('Myfavorite', function () {
-    return Inertia::render('Myfavorite');
+Route::get('Favorites', function () {
+    return Inertia::render('Favorites');
 })->middleware(['auth', 'verified'])->name('Myfavorite');
 
 
