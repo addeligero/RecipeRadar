@@ -15,6 +15,11 @@ Route::get('search', function () {
     return Inertia::render('Searched');
 })->middleware(['auth', 'verified'])->name('searched');
 
+Route::get('Myfavorite', function () {
+    return Inertia::render('Myfavorite');
+})->middleware(['auth', 'verified'])->name('Myfavorite');
+
+
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
