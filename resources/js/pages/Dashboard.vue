@@ -21,7 +21,7 @@ const image = '/images/1.png';
             <div
                 class="relative flex min-h-[30vh] flex-1 items-center justify-center rounded-xl border border-sidebar-border/70 dark:border-sidebar-border md:min-h-min"
             >
-                <img class="opacity-80" :src="image" alt="My Image" />
+                <PlaceholderPattern />
             </div>
             <div class="grid auto-rows-min gap-4 md:grid-cols-3">
                 <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
