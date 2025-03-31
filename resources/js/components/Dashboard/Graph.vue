@@ -2,7 +2,7 @@
     <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
 </template>
 
-<script>
+<script lang="ts">
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import { Bar } from 'vue-chartjs';
 
