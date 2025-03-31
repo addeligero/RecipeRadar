@@ -1,4 +1,20 @@
+<script setup lang="ts">
+import AppLayout from '@/layouts/AppLayout.vue';
+import { type BreadcrumbItem } from '@/types';
+import { Head } from '@inertiajs/vue3'; // Import Link from Inertia.js
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Dashboard',
+        href: '/dashboard',
+    },
+];
+const image = '/images/1.png';
+</script>
+
 <template>
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate est sed repellat enim repellendus alias neque tenetur mollitia omnis aliquid,
-    eligendi dolorem perferendis autem sequi facere. Ipsam dolores veniam totam.
+    <Head title="Dashboard" />
+
+    <AppLayout :breadcrumbs="breadcrumbs">
+        <h1>hi</h1>
+    </AppLayout>
 </template>
