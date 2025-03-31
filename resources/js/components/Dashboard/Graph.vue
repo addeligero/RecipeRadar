@@ -1,43 +1,26 @@
-/* app.vue */
+<template>
+    <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+</template>
+
 <script>
+import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
+import { Bar } from 'vue-chartjs';
+
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
+
 export default {
+    name: 'BarChart',
+    components: { Bar },
     data() {
         return {
-            chart: null,
-            options: {
-                animationEnabled: true,
-                exportEnabled: true,
-                title: {
-                    text: 'Primary Plastic Production by Industry Section - 2015',
-                },
-                axisX: {
-                    labelTextAlign: 'right',
-                },
-                axisY: {
-                    title: 'in Million Tonnes per Year',
-                    suffix: 'M',
-                },
-                data: [
-                    {
-                        type: 'bar',
-                        yValueFormatString: '#,###M tonnes',
-                        dataPoints: [
-                            { label: 'Industrial Machinery', y: 3 },
-                            { label: 'Electrical/Electronic', y: 18 },
-                            { label: 'Transportation', y: 27 },
-                            { label: 'Consumer & Institutional Products', y: 42 },
-                            { label: 'Other sectors', y: 47 },
-                            { label: 'Textiles', y: 59 },
-                            { label: 'Building and Construction', y: 65 },
-                            { label: 'Packaging', y: 146 },
-                        ],
-                    },
-                ],
+            chartData: {
+                labels: ['January', 'February', 'March'],
+                datasets: [{ data: [40, 20, 12] }],
+            },
+            chartOptions: {
+                responsive: true,
             },
         };
     },
 };
 </script>
-<template>
-    <CanvasJSChart :options="options" />
-</template>

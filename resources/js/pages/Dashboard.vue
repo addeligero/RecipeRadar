@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Graph from '@/components/Dashboard/Graph.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3'; // Import Link from Inertia.js
@@ -21,7 +22,7 @@ const image = '/images/1.png';
             <div
                 class="relative flex min-h-[30vh] flex-1 items-center justify-center rounded-xl border border-sidebar-border/70 dark:border-sidebar-border md:min-h-min"
             >
-                <PlaceholderPattern />
+                <Graph />
             </div>
             <div class="grid auto-rows-min gap-4 md:grid-cols-3">
                 <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
