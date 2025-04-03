@@ -13,6 +13,11 @@ const mainNavItems: NavItem[] = [
         href: '/dashboard',
         icon: LayoutGrid,
     },
+    {
+        title: 'Search',
+        href: '/search',
+        icon: LayoutGrid,
+    },
 ];
 
 /*
