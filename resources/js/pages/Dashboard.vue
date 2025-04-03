@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import MyFavorite from '@/components/Dashboard/RecentRecipes.vue';
-import TrendingRecipes from '@/components/Dashboard/TrendingRecipes.vue';
+import MyFavorite from '@/components/Dashboard/FavoriteNavigation.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
@@ -161,7 +160,6 @@ onMounted(() => {
             <!-- Bottom Sections -->
             <div class="grid gap-6 md:grid-cols-2">
                 <!-- Trending Recipes -->
-                <TrendingRecipes />
                 <div class="flex flex-col rounded-xl bg-white p-4 shadow-sm dark:bg-gray-800">
                     <div class="mb-4 flex items-center justify-between">
                         <h2 class="text-lg font-semibold">Trending Now</h2>
