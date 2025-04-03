@@ -63,6 +63,7 @@ const toggleFavorite = async (meal: Meal) => {
     favorites.value[meal.idMeal] = !wasFavorited;
 
     try {
+        // Post to the backend to save the favorite
         await router.post(
             '/favorites',
             {
@@ -74,6 +75,9 @@ const toggleFavorite = async (meal: Meal) => {
                 preserveState: true,
             },
         );
+
+        // After favoriting, redirect to the favorites page
+        router.visit('/favorites');
     } catch (err) {
         favorites.value[meal.idMeal] = wasFavorited; // Revert on error
         console.error('Error updating favorite:', err);

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import MyFavorite from '@/components/Dashboard/FavoriteNavigation.vue';
 import Search from '@/components/Dashboard/Search.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
@@ -16,6 +15,68 @@ const breadcrumbs: BreadcrumbItem[] = [
 const greeting = ref('');
 const username = ref('User');
 const isLoading = ref(true);
+
+const recipes = ref([
+    {
+        id: 1,
+        title: 'Classic Pancakes',
+        prepTime: '20 min',
+        image: '/images/recipes/pancakes.jpg',
+        isFavorite: false,
+    },
+    {
+        id: 2,
+        title: 'Avocado Toast',
+        prepTime: '10 min',
+        image: '/images/recipes/toast.jpg',
+        isFavorite: false,
+    },
+    {
+        id: 3,
+        title: 'Chicken Alfredo',
+        prepTime: '30 min',
+        image: '/images/recipes/alfredo.jpg',
+        isFavorite: false,
+    },
+    {
+        id: 4,
+        title: 'Chocolate Mousse',
+        prepTime: '40 min',
+        image: '/images/recipes/mousse.jpg',
+        isFavorite: false,
+    },
+    {
+        id: 5,
+        title: 'Greek Salad',
+        prepTime: '15 min',
+        image: '/images/recipes/salad.jpg',
+        isFavorite: false,
+    },
+    {
+        id: 6,
+        title: 'Beef Tacos',
+        prepTime: '25 min',
+        image: '/images/recipes/tacos.jpg',
+        isFavorite: false,
+    },
+]);
+
+const favorites = ref<any[]>([]);
+
+const toggleFavorite = (recipe: any) => {
+    const index = recipes.value.findIndex((r) => r.id === recipe.id);
+    if (index !== -1) {
+        recipes.value[index].isFavorite = !recipes.value[index].isFavorite;
+
+        if (recipes.value[index].isFavorite) {
+            if (!favorites.value.some((fav) => fav.id === recipe.id)) {
+                favorites.value.push(recipe);
+            }
+        } else {
+            favorites.value = favorites.value.filter((fav) => fav.id !== recipe.id);
+        }
+    }
+};
 
 onMounted(() => {
     setTimeout(() => {
@@ -36,6 +97,7 @@ onMounted(() => {
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-6 p-4 md:p-6">
+            <!-- Hero Section (Unchanged) -->
             <div
                 class="relative flex min-h-[180px] w-full flex-col justify-end overflow-hidden rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 p-6 text-white shadow-lg md:min-h-[220px]"
             >
@@ -47,13 +109,13 @@ onMounted(() => {
                     <h1 class="mb-1 text-2xl font-bold md:text-3xl">{{ greeting }}, {{ username }}!</h1>
                     <p class="text-sm opacity-90 md:text-base">What delicious dish are you looking to make today?</p>
 
-                    <!-- Integrated Search Component -->
                     <div class="mt-4 w-full max-w-lg">
                         <Search />
                     </div>
                 </div>
             </div>
 
+            <!-- Categories Grid (Unchanged) -->
             <div class="grid gap-4 md:grid-cols-4">
                 <div
                     v-for="(category, index) in ['Breakfast', 'Lunch', 'Dinner', 'Desserts']"
@@ -82,18 +144,33 @@ onMounted(() => {
 
             <!-- Main Content Grid -->
             <div class="grid gap-6 md:grid-cols-3">
-                <!-- My Favorites Section -->
+                <!-- My Favorites Section (Modified to show favorited recipes) -->
                 <div class="flex flex-col rounded-xl bg-white p-4 shadow-sm dark:bg-gray-800 md:col-span-1">
                     <div class="mb-4 flex items-center justify-between">
                         <h2 class="text-lg font-semibold">My Favorites</h2>
                         <button class="text-sm font-medium text-orange-600 hover:underline">View All</button>
                     </div>
                     <div class="flex-1">
-                        <MyFavorite />
+                        <div v-if="favorites.length === 0" class="py-4 text-center text-gray-500">No favorites yet</div>
+                        <div v-else class="space-y-2">
+                            <div
+                                v-for="fav in favorites"
+                                :key="fav.id"
+                                class="flex items-center rounded-lg p-2 hover:bg-gray-50 dark:hover:bg-gray-700"
+                            >
+                                <div class="mr-3 h-10 w-10 flex-shrink-0 overflow-hidden rounded-md bg-gray-200">
+                                    <img :src="fav.image" :alt="fav.title" class="h-full w-full object-cover" />
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium">{{ fav.title }}</p>
+                                    <p class="text-xs text-gray-500">{{ fav.prepTime }}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Recent Recipes Section -->
+                <!-- Recent Recipes Section (Now with real recipes and hearts) -->
                 <div class="flex flex-col rounded-xl bg-white p-4 shadow-sm dark:bg-gray-800 md:col-span-2">
                     <div class="mb-4 flex items-center justify-between">
                         <h2 class="text-lg font-semibold">Recent Recipes</h2>
@@ -101,34 +178,40 @@ onMounted(() => {
                     </div>
                     <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                         <div
-                            v-for="i in 6"
-                            :key="i"
-                            class="group cursor-pointer rounded-lg bg-gray-50 p-2 transition-all hover:bg-orange-50 dark:bg-gray-700 dark:hover:bg-gray-600"
+                            v-for="recipe in recipes"
+                            :key="recipe.id"
+                            class="group relative cursor-pointer rounded-lg bg-gray-50 p-2 transition-all hover:bg-orange-50 dark:bg-gray-700 dark:hover:bg-gray-600"
                         >
+                            <!-- Heart Button -->
+                            <button
+                                @click.stop="toggleFavorite(recipe)"
+                                class="absolute right-2 top-2 z-10 rounded-full bg-white/80 p-1.5 backdrop-blur-sm transition-colors hover:bg-white"
+                                :class="{ 'text-red-500': recipe.isFavorite, 'text-gray-400': !recipe.isFavorite }"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
+                                    <path
+                                        d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"
+                                    />
+                                </svg>
+                            </button>
+
                             <div class="relative mb-2 aspect-square overflow-hidden rounded-lg bg-gray-200">
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                        class="h-8 w-8 text-gray-400"
-                                    >
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                    </svg>
-                                </div>
+                                <img
+                                    :src="recipe.image"
+                                    :alt="recipe.title"
+                                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                />
                             </div>
                             <div class="flex flex-col">
-                                <span class="line-clamp-1 font-medium">Loading recipe...</span>
-                                <span class="text-xs text-gray-500">Prep time: -- min</span>
+                                <span class="line-clamp-1 font-medium">{{ recipe.title }}</span>
+                                <span class="text-xs text-gray-500">Prep time: {{ recipe.prepTime }}</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Bottom Sections -->
+            <!-- Bottom Sections (Unchanged) -->
             <div class="grid gap-6 md:grid-cols-2">
                 <!-- Trending Recipes -->
                 <div class="flex flex-col rounded-xl bg-white p-4 shadow-sm dark:bg-gray-800">
