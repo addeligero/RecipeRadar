@@ -17,19 +17,15 @@ const username = ref('User');
 const isLoading = ref(true);
 
 onMounted(() => {
-    // Simulate loading time
     setTimeout(() => {
         isLoading.value = false;
     }, 500);
 
-    // Set greeting based on time of day
     const hour = new Date().getHours();
     if (hour < 12) greeting.value = 'Good morning';
     else if (hour < 18) greeting.value = 'Good afternoon';
     else greeting.value = 'Good evening';
 
-    // Here you would fetch the user name from your auth system
-    // For now using a placeholder
     username.value = 'Chef';
 });
 </script>
@@ -39,7 +35,6 @@ onMounted(() => {
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-6 p-4 md:p-6">
-            <!-- Hero Banner -->
             <div
                 class="relative flex min-h-[180px] w-full flex-col justify-end overflow-hidden rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 p-6 text-white shadow-lg md:min-h-[220px]"
             >
@@ -82,7 +77,6 @@ onMounted(() => {
                 </div>
             </div>
 
-            <!-- Quick Access Section -->
             <div class="grid gap-4 md:grid-cols-4">
                 <div
                     v-for="(category, index) in ['Breakfast', 'Lunch', 'Dinner', 'Desserts']"
@@ -235,7 +229,3 @@ onMounted(() => {
         </div>
     </AppLayout>
 </template>
-
-<style scoped>
-/* Add any component-specific styles here */
-</style>
