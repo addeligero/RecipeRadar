@@ -12,8 +12,13 @@ Route::get('dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('search', function () {
-    return Inertia::render('Search');
-})->middleware(['auth', 'verified'])->name('search');
+    return Inertia::render('Searched');
+})->middleware(['auth', 'verified'])->name('searched');
+
+Route::get('Favorites', function () {
+    return Inertia::render('Favorites');
+})->middleware(['auth', 'verified'])->name('Myfavorite');
+
 
 
 require __DIR__.'/settings.php';
