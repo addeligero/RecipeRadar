@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import MyFavorite from '@/components/Dashboard/FavoriteNavigation.vue';
+import Search from '@/components/Dashboard/Search.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
@@ -46,33 +47,9 @@ onMounted(() => {
                     <h1 class="mb-1 text-2xl font-bold md:text-3xl">{{ greeting }}, {{ username }}!</h1>
                     <p class="text-sm opacity-90 md:text-base">What delicious dish are you looking to make today?</p>
 
-                    <div class="mt-4 flex w-full max-w-lg">
-                        <div class="relative flex-1">
-                            <input
-                                type="text"
-                                placeholder="Search for recipes, ingredients, cuisine..."
-                                class="w-full rounded-l-lg border-0 bg-white/90 py-3 pl-4 pr-10 text-gray-800 placeholder-gray-500 shadow-sm outline-none focus:bg-white focus:ring-2 focus:ring-orange-400"
-                            />
-                            <button class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="h-5 w-5"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-                        <button class="flex items-center justify-center rounded-r-lg bg-orange-700 px-4 text-white shadow-sm hover:bg-orange-800">
-                            Search
-                        </button>
+                    <!-- Integrated Search Component -->
+                    <div class="mt-4 w-full max-w-lg">
+                        <Search />
                     </div>
                 </div>
             </div>
