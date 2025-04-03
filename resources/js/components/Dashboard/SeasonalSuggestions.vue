@@ -1,8 +1,6 @@
-<!-- components/Dashboard/SeasonalSuggestions.vue -->
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 
-// Get current season based on month
 const getCurrentSeason = () => {
     const month = new Date().getMonth();
     if (month >= 2 && month <= 4) return 'Spring';
