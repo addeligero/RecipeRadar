@@ -1,8 +1,24 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
-import { Head, router } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { Head, router, usePage } from '@inertiajs/vue3';
+import { computed, ref } from 'vue';
+
+interface Meal {
+    idMeal: string;
+    strMeal: string;
+    strMealThumb: string;
+    strCategory?: string;
+    strArea?: string;
+    strInstructions?: string;
+    strYoutube?: string;
+    // Add other meal properties as needed
+}
+
+interface Favorite {
+    id: string;
+    data: Meal;
+}
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -11,40 +27,58 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-const meals = ref([]);
+const meals = ref<Meal[]>([]);
 const error = ref<string | null>(null);
 const searchQuery = ref('');
 const isLoading = ref(false);
-const favorites = ref<Record<string, boolean>>({});
+
+// Get current favorites from page props with type safety
+const currentFavorites = computed<Favorite[]>(() => {
+    const favs = usePage().props.favorites;
+    return Array.isArray(favs) ? favs : [];
+});
+
+const favorites = ref<Record<string, boolean>>(
+    currentFavorites.value.reduce(
+        (acc, favorite) => {
+            if (favorite?.id) {
+                acc[favorite.id] = true;
+            }
+            return acc;
+        },
+        {} as Record<string, boolean>,
+    ),
+);
 
 // Check if a meal is favorited
 const isFavorited = (mealId: string) => {
-    return favorites.value[mealId] || false;
+    return !!favorites.value[mealId];
 };
 
 // Toggle favorite status
-const toggleFavorite = (meal: any) => {
-    favorites.value[meal.idMeal] = !favorites.value[meal.idMeal];
+const toggleFavorite = async (meal: Meal) => {
+    if (!meal?.idMeal) return;
 
-    // Send to backend
-    router.post(
-        '/favorites',
-        {
-            meal_id: meal.idMeal,
-            meal_data: meal, // Send entire meal data to store
-            is_favorite: favorites.value[meal.idMeal],
-        },
-        {
-            preserveScroll: true,
-            onSuccess: () => {
-                // Optional: Show a success message
+    const wasFavorited = isFavorited(meal.idMeal);
+    favorites.value[meal.idMeal] = !wasFavorited;
+
+    try {
+        await router.post(
+            '/favorites',
+            {
+                meal_id: meal.idMeal, // Send only the meal_id and is_favorite
+                is_favorite: !wasFavorited,
             },
-            onError: () => {
-                // Revert if there's an error
-                favorites.value[meal.idMeal] = !favorites.value[meal.idMeal];
+            {
+                preserveScroll: true,
+                preserveState: true,
             },
-        },
-    );
+        );
+    } catch (err) {
+        favorites.value[meal.idMeal] = wasFavorited; // Revert on error
+        console.error('Error updating favorite:', err);
+        error.value = 'Failed to update favorite. Please try again later.'; // Optionally handle the error UI
+    }
 };
 
 // Fetch data from the API
@@ -60,7 +94,13 @@ const fetchMeals = async () => {
         error.value = null;
         const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchQuery.value}`);
         const data = await response.json();
-        meals.value = data.meals || [];
+
+        if (data.meals) {
+            meals.value = data.meals;
+        } else {
+            error.value = 'No meals found. Try searching for something else.';
+            meals.value = [];
+        }
     } catch (err) {
         console.error('Error fetching meals:', err);
         error.value = 'Failed to fetch meals. Please try again later.';
@@ -69,8 +109,8 @@ const fetchMeals = async () => {
     }
 };
 
-// Helper function to extract YouTube video ID
 const getYouTubeVideoId = (url: string): string => {
+    if (!url) return '';
     const regExp = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)|youtu\.be\/([^&]+)/;
     const match = url.match(regExp);
     return match ? match[1] || match[2] : '';
@@ -116,7 +156,7 @@ const getYouTubeVideoId = (url: string): string => {
                         <div class="flex flex-col md:w-1/3">
                             <!-- Meal Image -->
                             <div class="relative">
-                                <img :src="meal.strMealThumb" :alt="meal.strMeal" class="h-48 w-full rounded-lg object-cover" />
+                                <img :src="meal.strMealThumb" :alt="meal.strMeal || 'Meal image'" class="h-48 w-full rounded-lg object-cover" />
                                 <!-- Favorite Button -->
                                 <button
                                     @click="toggleFavorite(meal)"
@@ -157,9 +197,11 @@ const getYouTubeVideoId = (url: string): string => {
                         <!-- Meal Details -->
                         <div class="flex flex-col justify-center md:w-2/3">
                             <h2 class="mb-2 text-2xl font-semibold">{{ meal.strMeal }}</h2>
-                            <p class="mb-1 text-sm text-gray-600"><strong>Category:</strong> {{ meal.strCategory }}</p>
-                            <p class="mb-1 text-sm text-gray-600"><strong>Area:</strong> {{ meal.strArea }}</p>
-                            <p class="mb-2 text-sm text-gray-600"><strong>Instructions:</strong> {{ meal.strInstructions }}</p>
+                            <p v-if="meal.strCategory" class="mb-1 text-sm text-gray-600"><strong>Category:</strong> {{ meal.strCategory }}</p>
+                            <p v-if="meal.strArea" class="mb-1 text-sm text-gray-600"><strong>Area:</strong> {{ meal.strArea }}</p>
+                            <p v-if="meal.strInstructions" class="mb-2 text-sm text-gray-600">
+                                <strong>Instructions:</strong> {{ meal.strInstructions }}
+                            </p>
                         </div>
                     </div>
                 </div>
