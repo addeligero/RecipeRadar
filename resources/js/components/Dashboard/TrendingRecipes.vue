@@ -1,4 +1,3 @@
-<!-- components/Dashboard/TrendingRecipes.vue -->
 <script setup lang="ts">
 import { ref } from 'vue';
 
