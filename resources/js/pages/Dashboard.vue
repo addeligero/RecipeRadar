@@ -21,7 +21,7 @@ const recipes = ref([
         id: 1,
         title: 'Classic Pancakes',
         prepTime: '20 min',
-        image: '/images/recipes/pancakes.jpg',
+        image: '/images/recipes/pan.jpg',
         isFavorite: false,
     },
     {
@@ -56,7 +56,7 @@ const recipes = ref([
         id: 6,
         title: 'Beef Tacos',
         prepTime: '25 min',
-        image: '/images/recipes/tacos.jpg',
+        image: '/images/recipes/tacos.jpg', // Correct image path
         isFavorite: false,
     },
 ]);
