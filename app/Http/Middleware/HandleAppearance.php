@@ -16,6 +16,9 @@ class HandleAppearance
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // Log the cookie value for debugging
+        \Log::debug('Appearance Cookie: ' . $request->cookie('appearance'));
+
         View::share('appearance', $request->cookie('appearance') ?? 'system');
 
         return $next($request);

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\MyFavoritesController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -19,6 +20,7 @@ Route::get('Favorites', function () {
     return Inertia::render('Favorites');
 })->middleware(['auth', 'verified'])->name('Myfavorite');
 
+Route::middleware('auth')->post('/favorites', [MyFavoritesController::class, 'store']);
 
 
 require __DIR__.'/settings.php';

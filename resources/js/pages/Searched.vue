@@ -40,7 +40,7 @@ const fetchMeals = async () => {
 // Add to favorites function
 const addToFavorites = async (meal: any) => {
     try {
-        const res = await fetch('/api/favorites', {
+        const res = await fetch('/favorites', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
