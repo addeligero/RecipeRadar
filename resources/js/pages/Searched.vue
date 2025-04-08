@@ -37,6 +37,29 @@ const fetchMeals = async () => {
         isLoading.value = false;
     }
 };
+// Add to favorites function
+const addToFavorites = async (meal: any) => {
+    try {
+        const res = await fetch('/api/favorites', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': (document.querySelector('meta[name="csrf-token"]') as HTMLMetaElement).content,
+            },
+            body: JSON.stringify({
+                meal_id: meal.idMeal,
+                meal_name: meal.strMeal,
+                meal_thumb: meal.strMealThumb,
+            }),
+        });
+
+        if (!res.ok) throw new Error('Failed to save favorite.');
+        alert('Meal added to favorites!');
+    } catch (error) {
+        console.error(error);
+        alert('Could not add to favorites.');
+    }
+};
 
 // Helper function to extract YouTube video ID
 const getYouTubeVideoId = (url: string): string => {
@@ -106,6 +129,12 @@ const getYouTubeVideoId = (url: string): string => {
                             <p class="mb-1 text-sm text-gray-600"><strong>Category:</strong> {{ meal.strCategory }}</p>
                             <p class="mb-1 text-sm text-gray-600"><strong>Area:</strong> {{ meal.strArea }}</p>
                             <p class="mb-2 text-sm text-gray-600"><strong>Instructions:</strong> {{ meal.strInstructions }}</p>
+                            <button
+                                @click="addToFavorites(meal)"
+                                class="mt-2 w-max rounded bg-green-600 px-3 py-1 text-sm text-white hover:bg-green-700"
+                            >
+                                Add to My Favorites
+                            </button>
                         </div>
                     </div>
                 </div>
