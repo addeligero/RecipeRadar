@@ -8,7 +8,6 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: '/Favorites',
     },
 ];
-const image = '/images/1.png';
 </script>
 
 <template>
