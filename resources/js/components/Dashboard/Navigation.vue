@@ -18,6 +18,10 @@ defineProps({
         type: String,
         required: true,
     },
+    title: {
+        type: String,
+        default: 'Welcome to Our Dashboard',
+    },
 });
 </script>
 
@@ -27,7 +31,7 @@ defineProps({
         <div class="absolute inset-0 bg-black opacity-25"></div>
 
         <div class="relative z-10 flex flex-col items-center justify-center p-5 text-center">
-            <h2 class="mb-4 text-2xl font-bold text-white">{{ buttonName }}</h2>
+            <h2 class="mb-4 text-2xl font-bold text-white">{{ title }}</h2>
             <p class="mb-6 text-sm text-gray-200">{{ description }}</p>
             <Link
                 :href="hreflink"
