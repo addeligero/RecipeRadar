@@ -28,5 +28,10 @@ Route::post('/favorites', [MyFavoritesController::class, 'store'])
 //para delete
 Route::delete('/favorites/{id}', [MyFavoritesController::class, 'destroy'])->middleware(['auth']);
 
+Route::get('About', function () {
+    return Inertia::render('About');
+})->middleware(['auth', 'verified']);
+
+
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
