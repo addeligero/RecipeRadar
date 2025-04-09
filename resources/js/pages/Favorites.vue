@@ -6,7 +6,7 @@ import { computed, onMounted } from 'vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Favorites',
+        title: 'Top lists',
         href: '/favorites',
     },
 ];
@@ -41,13 +41,15 @@ onMounted(() => {
                 <div v-for="favorite in favorites" :key="favorite.id" class="rounded-2xl bg-white p-5 shadow transition hover:shadow-md">
                     <h2 class="mb-2 text-xl font-semibold text-gray-800">{{ favorite.meal_name }}</h2>
                     <img :src="favorite.meal_thumb" alt="Meal Image" class="mb-4 w-full rounded-lg" />
-                    <button class="rounded-xl bg-blue-500 px-4 py-2 text-sm text-white transition hover:bg-blue-600">View More</button>
-                    <button
-                        @click="deleteFavorite(favorite.id)"
-                        class="rounded-xl bg-red-500 px-4 py-2 text-sm text-white transition hover:bg-red-600"
-                    >
-                        Delete
-                    </button>
+                    <div class="flex items-center justify-between">
+                        <button class="rounded-xl bg-blue-500 px-4 py-2 text-sm text-white transition hover:bg-blue-600">View More</button>
+                        <button
+                            @click="deleteFavorite(favorite.id)"
+                            class="rounded-xl bg-red-500 px-4 py-2 text-sm text-white transition hover:bg-red-600"
+                        >
+                            Delete
+                        </button>
+                    </div>
                 </div>
             </div>
 
