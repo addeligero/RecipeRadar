@@ -20,7 +20,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'My Favorites',
-        href: '/Favorites',
+        href: '/favorites',
         icon: LayoutGrid,
     },
 ];
