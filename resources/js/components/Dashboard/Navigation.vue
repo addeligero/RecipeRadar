@@ -35,7 +35,7 @@ defineProps({
             <p class="mb-6 text-sm text-gray-200">{{ description }}</p>
             <Link
                 :href="hreflink"
-                class="relative z-10 mb-4 inline-flex transform items-center rounded-lg bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 px-6 py-3 text-base font-medium text-white transition duration-300 ease-in-out hover:scale-105 hover:bg-opacity-90 focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-700"
+                class="from-brown-700 via-brown-600 to-brown-500 focus:ring-brown-300 dark:focus:ring-brown-700 relative z-10 mb-4 inline-flex transform items-center rounded-lg bg-gradient-to-r px-6 py-3 text-base font-medium text-white transition duration-300 ease-in-out hover:scale-105 hover:bg-opacity-90 focus:outline-none focus:ring-4"
                 :aria-label="'Go to ' + buttonName"
             >
                 <!-- Icon -->
@@ -76,7 +76,7 @@ defineProps({
 }
 
 .bg-gradient-to-r {
-    background-image: linear-gradient(to right, #6366f1, #a855f7, #ec4899);
+    background-image: linear-gradient(to right, #6b4226, #8e6e53, #b57b47); /* Wood-like gradient */
 }
 
 .hover\:scale-105:hover {
@@ -86,4 +86,25 @@ defineProps({
 .bg-gray-800 {
     background-color: #2d3748;
 }
+
+.bg-brown-500 {
+    background-color: #8e6e53;
+}
+
+.bg-brown-700 {
+    background-color: #6b4226;
+}
+
+.bg-brown-600 {
+    background-color: #7f5427;
+}
+
+.focus\:ring-brown-300 {
+    ring-color: #a27456;
+}
+
+.focus\:ring-brown-700 {
+    ring-color: #5f3f1f;
+}
 </style>
+s
