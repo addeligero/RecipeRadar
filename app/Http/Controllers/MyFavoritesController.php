@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MyFavorites;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Inertia\Inertia;
 
 class MyFavoritesController extends Controller
 {
@@ -45,5 +46,16 @@ class MyFavoritesController extends Controller
             return response()->json(['message' => 'Server error: ' . $e->getMessage()], 500);
         }
     }
+    public function index(Request $request)
+    {
+    
+
+        $favorites = MyFavorites::where('user_id', $request->user()->id)->get();
+
+        return Inertia::render('Favorites', [
+            'favorites' => $favorites,
+        ]);
+    }
+
 
 }

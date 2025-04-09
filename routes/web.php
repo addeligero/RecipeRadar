@@ -16,12 +16,15 @@ Route::get('search', function () {
     return Inertia::render('Searched');
 })->middleware(['auth', 'verified'])->name('searched');
 
-Route::get('Favorites', function () {
-    return Inertia::render('Favorites');
-})->middleware(['auth', 'verified'])->name('Myfavorite');
+//  Favorites route with data rendering
+// Show favorites
+Route::get('/favorites', [MyFavoritesController::class, 'index'])  // lowercase
+    ->middleware(['auth', 'verified']);
 
-Route::middleware('auth')->post('/favorites', [MyFavoritesController::class, 'store']);
 
+// Store a new favorite
+Route::post('/favorites', [MyFavoritesController::class, 'store'])
+    ->middleware(['auth', 'verified']);
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
