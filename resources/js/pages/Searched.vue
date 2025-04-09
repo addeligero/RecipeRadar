@@ -81,11 +81,12 @@ const getYouTubeVideoId = (url: string): string => {
                     v-model="searchQuery"
                     type="text"
                     placeholder="Enter a meal name..."
-                    class="w-full rounded-lg border px-4 py-2 text-sm text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="w-full rounded-lg border px-4 py-3 text-sm text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <button
                     @click="fetchMeals"
-                    class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+                    class="from-brown-700 via-brown-600 to-brown-500 focus:ring-brown-300 dark:focus:ring-brown-700 relative z-10 mb-4 inline-flex transform items-center rounded-lg bg-gradient-to-r px-6 py-3 text-base font-medium text-white transition duration-300 ease-in-out hover:scale-105 hover:bg-opacity-90 focus:outline-none focus:ring-4"
+                    :aria-label="'Search meals for ' + searchQuery"
                 >
                     Search
                 </button>
@@ -146,3 +147,25 @@ const getYouTubeVideoId = (url: string): string => {
         </div>
     </AppLayout>
 </template>
+
+<style scoped>
+.bg-gradient-to-r {
+    background-image: linear-gradient(to right, #6b4226, #8e6e53, #b57b47); /* Wood-like gradient */
+}
+
+.hover\:scale-105:hover {
+    transform: scale(1.05);
+}
+
+.focus\:ring-brown-300 {
+    ring-color: #a27456;
+}
+
+.focus\:ring-brown-700 {
+    ring-color: #5f3f1f;
+}
+
+.transition-all {
+    transition: all 0.3s ease-in-out;
+}
+</style>

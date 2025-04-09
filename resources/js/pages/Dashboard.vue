@@ -47,7 +47,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                         title="About Us"
                         hreflink="/about"
                         buttonName="Discover"
-                        description="Want to know more about us?"
+                        description="  Want to know more about us? Discover our story, learn about our core values, and see what motivates our team to create innovative solutions. "
                         :icon="`<svg xmlns='http://www.w3.org/2000/svg' class='mr-3 h-5 w-5' fill='none' stroke='currentColor' viewBox='0 0 24 24' stroke-width='2' aria-hidden='true'><path stroke-linecap='round' stroke-linejoin='round' d='M5 12l5 5L20 7'></path></svg>`"
                     />
                 </div>
