@@ -18,6 +18,11 @@ const mainNavItems: NavItem[] = [
         href: '/search',
         icon: LayoutGrid,
     },
+    {
+        title: 'My Favorites',
+        href: '/favorites',
+        icon: LayoutGrid,
+    },
 ];
 
 /*
