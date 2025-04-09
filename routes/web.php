@@ -16,8 +16,7 @@ Route::get('search', function () {
     return Inertia::render('Searched');
 })->middleware(['auth', 'verified'])->name('searched');
 
-//  Favorites route with data rendering
-// Show favorites
+
 Route::get('/favorites', [MyFavoritesController::class, 'index'])  // lowercase
     ->middleware(['auth', 'verified']);
 
@@ -25,6 +24,9 @@ Route::get('/favorites', [MyFavoritesController::class, 'index'])  // lowercase
 // Store a new favorite
 Route::post('/favorites', [MyFavoritesController::class, 'store'])
     ->middleware(['auth', 'verified']);
+
+//para delete
+Route::delete('/favorites/{id}', [MyFavoritesController::class, 'destroy'])->middleware(['auth']);
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

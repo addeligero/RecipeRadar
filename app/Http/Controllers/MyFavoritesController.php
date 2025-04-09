@@ -57,5 +57,19 @@ class MyFavoritesController extends Controller
         ]);
     }
 
+    public function destroy($id)
+    {
+        $favorite = MyFavorites::findOrFail($id);
+
+        
+        if ($favorite->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $favorite->delete();
+
+        return back()->with('success', 'Favorite deleted!');
+    }
+
 
 }

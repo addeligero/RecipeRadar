@@ -1,17 +1,28 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
-import { Head, usePage } from '@inertiajs/vue3';
+import { Head, router, usePage } from '@inertiajs/vue3';
 import { computed, onMounted } from 'vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Favorites',
-        href: '/Favorites',
+        href: '/favorites',
     },
 ];
 
 const favorites = computed(() => usePage().props.favorites ?? []);
+
+function deleteFavorite(id: number) {
+    if (confirm('Are you sure you want to remove this favorite?')) {
+        router.delete(`/favorites/${id}`, {
+            onSuccess: () => {
+                console.log(`Deleted favorite with ID: ${id}`);
+            },
+        });
+    }
+}
+
 onMounted(() => {
     console.log(favorites.value);
     console.log('Page props:', usePage().props);
@@ -31,6 +42,12 @@ onMounted(() => {
                     <h2 class="mb-2 text-xl font-semibold text-gray-800">{{ favorite.meal_name }}</h2>
                     <img :src="favorite.meal_thumb" alt="Meal Image" class="mb-4 w-full rounded-lg" />
                     <button class="rounded-xl bg-blue-500 px-4 py-2 text-sm text-white transition hover:bg-blue-600">View More</button>
+                    <button
+                        @click="deleteFavorite(favorite.id)"
+                        class="rounded-xl bg-red-500 px-4 py-2 text-sm text-white transition hover:bg-red-600"
+                    >
+                        Delete
+                    </button>
                 </div>
             </div>
 
