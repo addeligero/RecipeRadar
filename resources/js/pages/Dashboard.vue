@@ -12,7 +12,6 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 </script>
-
 <template>
     <Head title="Dashboard" />
 
@@ -22,8 +21,12 @@ const breadcrumbs: BreadcrumbItem[] = [
                 <MainView />
                 <Inspiration />
             </div>
-            <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
+
+            <div class="grid auto-rows-min gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Search Navigation -->
+                <div
+                    class="relative flex min-h-[200px] flex-col items-center justify-between overflow-hidden rounded-xl border border-sidebar-border/70 p-4 dark:border-sidebar-border"
+                >
                     <Navigation
                         hreflink="/search"
                         buttonName="Start Searching"
@@ -33,7 +36,10 @@ const breadcrumbs: BreadcrumbItem[] = [
                     />
                 </div>
 
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
+                <!-- Saved Recipes Navigation -->
+                <div
+                    class="relative flex min-h-[200px] flex-col items-center justify-between overflow-hidden rounded-xl border border-sidebar-border/70 p-4 dark:border-sidebar-border"
+                >
                     <Navigation
                         title="Saved Recipes"
                         hreflink="/favorites"
@@ -42,12 +48,16 @@ const breadcrumbs: BreadcrumbItem[] = [
                         :icon="`<svg xmlns='http://www.w3.org/2000/svg' class='mr-3 h-5 w-5' fill='none' stroke='currentColor' viewBox='0 0 24 24' stroke-width='2' aria-hidden='true'><path stroke-linecap='round' stroke-linejoin='round' d='M5 12l5 5L20 7'></path></svg>`"
                     />
                 </div>
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
+
+                <!-- About Us Navigation -->
+                <div
+                    class="relative flex min-h-[200px] flex-col items-center justify-between overflow-hidden rounded-xl border border-sidebar-border/70 p-4 dark:border-sidebar-border"
+                >
                     <Navigation
                         title="About Us"
                         hreflink="/about"
                         buttonName="Discover"
-                        description="  Want to know more about us? Discover our story, learn about our core values, and see what motivates our team to create innovative solutions. "
+                        description="Want to know more about us? Discover our story, learn about our core values, and see what motivates our team to create innovative solutions."
                         :icon="`<svg xmlns='http://www.w3.org/2000/svg' class='mr-3 h-5 w-5' fill='none' stroke='currentColor' viewBox='0 0 24 24' stroke-width='2' aria-hidden='true'><path stroke-linecap='round' stroke-linejoin='round' d='M5 12l5 5L20 7'></path></svg>`"
                     />
                 </div>
