@@ -110,7 +110,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                 </div>
             </section>
 
-            <!-- Team Section (New) -->
+            <!-- Team Section (Updated Window Style) -->
             <section class="space-y-8 px-4">
                 <h2 class="text-center text-3xl font-semibold">
                     <span class="inline-block border-b-2 border-amber-500 pb-2">Meet Our Team</span>
@@ -119,37 +119,51 @@ const breadcrumbs: BreadcrumbItem[] = [
                     The talented people behind RecipeRadar who work tirelessly to bring you the best cooking experience.
                 </p>
 
-                <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                    <div class="text-center">
-                        <div class="relative mx-auto h-40 w-40 overflow-hidden rounded-full border-2 border-amber-500">
-                            <img src="/images/marky.jpg" alt="Team Member" class="h-full w-full object-cover" />
+                <div class="space-y-12">
+                    <!-- Top Row (2 members) -->
+                    <div class="flex flex-wrap justify-center gap-12">
+                        <div class="w-64 text-center">
+                            <div class="relative mx-auto h-40 w-40 overflow-hidden rounded-full border-2 border-amber-500">
+                                <img src="/images/marky.jpg" alt="Mark Jamisola" class="h-full w-full object-cover" />
+                            </div>
+                            <h3 class="mt-4 text-xl font-semibold">Mark Jamisola</h3>
+                            <p class="text-amber-500">Founder & Head Chef</p>
                         </div>
-                        <h3 class="mt-4 text-xl font-semibold">Mark Jamisola</h3>
-                        <p class="text-amber-500">Founder & Head Chef</p>
+
+                        <div class="w-64 text-center">
+                            <div class="relative mx-auto h-40 w-40 overflow-hidden rounded-full border-2 border-amber-500">
+                                <img src="/images/adrian.jpg" alt="Adrian Deligero" class="h-full w-full object-cover" />
+                            </div>
+                            <h3 class="mt-4 text-xl font-semibold">Adrian Deligero</h3>
+                            <p class="text-amber-500">Lead Developer</p>
+                        </div>
                     </div>
 
-                    <div class="text-center">
-                        <div class="relative mx-auto h-40 w-40 overflow-hidden rounded-full border-2 border-amber-500">
-                            <img src="/images/adrian.jpg" alt="Team Member" class="h-full w-full object-cover" />
+                    <!-- Bottom Row (3 members) -->
+                    <div class="flex flex-wrap justify-center gap-12">
+                        <div class="w-64 text-center">
+                            <div class="relative mx-auto h-40 w-40 overflow-hidden rounded-full border-2 border-amber-500">
+                                <img src="/images/james.jpg" alt="James Espana" class="h-full w-full object-cover" />
+                            </div>
+                            <h3 class="mt-4 text-xl font-semibold">James Espana</h3>
+                            <p class="text-amber-500">Recipe Curator</p>
                         </div>
-                        <h3 class="mt-4 text-xl font-semibold">Adrian Deligero</h3>
-                        <p class="text-amber-500">Lead Developer</p>
-                    </div>
 
-                    <div class="text-center">
-                        <div class="relative mx-auto h-40 w-40 overflow-hidden rounded-full border-2 border-amber-500">
-                            <img src="/images/james.jpg" alt="Team Member" class="h-full w-full object-cover" />
+                        <div class="w-64 text-center">
+                            <div class="relative mx-auto h-40 w-40 overflow-hidden rounded-full border-2 border-amber-500">
+                                <img src="/images/christ.jpg" alt="Christ Charl Gabales" class="h-full w-full object-cover" />
+                            </div>
+                            <h3 class="mt-4 text-xl font-semibold">Christ Charl Gabales</h3>
+                            <p class="text-amber-500">UX Designer</p>
                         </div>
-                        <h3 class="mt-4 text-xl font-semibold">James Espana</h3>
-                        <p class="text-amber-500">Recipe Curator</p>
-                    </div>
 
-                    <div class="text-center">
-                        <div class="relative mx-auto h-40 w-40 overflow-hidden rounded-full border-2 border-amber-500">
-                            <img src="/images/christ.jpg" alt="Team Member" class="h-full w-full object-cover" />
+                        <div class="w-64 text-center">
+                            <div class="relative mx-auto h-40 w-40 overflow-hidden rounded-full border-2 border-amber-500">
+                                <img src="/images/junkyle.jpg" alt="Sophia Cruz" class="h-full w-full object-cover" />
+                            </div>
+                            <h3 class="mt-4 text-xl font-semibold">Jun Kyle Gulay</h3>
+                            <p class="text-amber-500">Marketing Specialist</p>
                         </div>
-                        <h3 class="mt-4 text-xl font-semibold">Christ Charl Gabales</h3>
-                        <p class="text-amber-500">UX Designer</p>
                     </div>
                 </div>
             </section>
