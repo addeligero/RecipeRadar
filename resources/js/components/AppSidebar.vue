@@ -23,6 +23,11 @@ const mainNavItems: NavItem[] = [
         href: '/favorites',
         icon: LayoutGrid,
     },
+    {
+        title: 'About Us',
+        href: '/about',
+        icon: LayoutGrid,
+    },
 ];
 
 /*

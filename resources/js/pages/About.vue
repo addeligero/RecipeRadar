@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
+<<<<<<< HEAD
 
+=======
+>>>>>>> 37b3dc894a083f9fe6b6bccd2a2c6d3ba6d24949
 import { type BreadcrumbItem } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
