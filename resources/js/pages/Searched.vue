@@ -85,7 +85,7 @@ const getYouTubeVideoId = (url: string): string => {
                 />
                 <button
                     @click="fetchMeals"
-                    class="from-brown-700 via-brown-600 to-brown-500 focus:ring-brown-300 dark:focus:ring-brown-700 relative z-10 mb-4 inline-flex transform items-center rounded-lg bg-gradient-to-r px-6 py-3 text-base font-medium text-white transition duration-300 ease-in-out hover:scale-105 hover:bg-opacity-90 focus:outline-none focus:ring-4"
+                    class="from-brown-700 via-brown-600 to-brown-500 focus:ring-brown-300 dark:focus:ring-brown-700 relative z-10 inline-flex transform items-center rounded-lg bg-gradient-to-r px-6 py-3 text-base font-medium text-white transition duration-300 ease-in-out hover:scale-105 hover:bg-opacity-90 focus:outline-none focus:ring-4"
                     :aria-label="'Search meals for ' + searchQuery"
                 >
                     Search
